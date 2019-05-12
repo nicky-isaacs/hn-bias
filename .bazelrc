@@ -1,0 +1,4 @@
+startup --output_base=./dist
+build --symlink_prefix=/
+build --strategy=Scalac=worker
+build --worker_sandboxing
