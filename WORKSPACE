@@ -23,16 +23,54 @@ scala_repositories((
     }
 ))
 
-maven_jar(
-    name = "scalatest",
-    artifact = "org.scalatest:scalatest:1.3",
-    sha1 = "fa43e1a1e3dadb511afba2bf48020f4102bf221a",
-)
-
 # Needed as a workout for https://github.com/bazelbuild/rules_scala/issues/726
 http_archive(
      name = "com_google_protobuf",
      sha256 = "9510dd2afc29e7245e9e884336f848c8a6600a14ae726adb6befdb4f786f0be2",
      urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.6.1.3.zip"],
      strip_prefix = "protobuf-3.6.1.3",
+)
+
+# Maven artifacts
+maven_jar(
+    name = "http4s_core",
+    artifact = "org.http4s:http4s-core_2.12:0.20.0",
+    sha1 = "3c2c7edc4f0d78024be2dc3b6796b6211b508c50",
+)
+
+maven_jar(
+    name = "http4s_client",
+    artifact = "org.http4s:http4s-client_2.12:0.20.0",
+)
+
+maven_jar(
+    name = "http4s_dsl",
+    artifact = "org.http4s:http4s-dsl_2.12:0.20.0",
+    sha1 = "b52090e5763ebce6c084c1e94ccf24e164d94b77",
+)
+
+maven_jar(
+    name = "http4s_blaze_client",
+    artifact = "org.http4s:http4s-blaze-client_2.12:0.20.0",
+    sha1 = "42e40a73324194467360527b41d5dd6a34da3a45",
+)
+
+maven_jar(
+    name = "http4s_blaze_core",
+    artifact = "org.http4s:http4s-blaze-core_2.12:0.20.0",
+)
+
+maven_jar(
+    name = "cats_effect",
+    artifact = "org.typelevel:cats-effect_2.12:2.0.0-M1",
+)
+
+maven_jar(
+    name = "cats_core",
+    artifact = "org.typelevel:cats-core_2.12:2.0.0-M1",
+)
+
+maven_jar(
+    name = "cats_kernel",
+    artifact = "org.typelevel:cats-kernel_2.12:2.0.0-M1",
 )

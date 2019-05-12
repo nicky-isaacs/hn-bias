@@ -1,7 +1,16 @@
 scala_library(
   name = "hndumper",
   srcs = glob(["*.scala"]),
-  deps = [],
+  deps = [
+      "@cats_core//jar",
+      "@cats_effect//jar",
+      "@cats_kernel//jar",
+      "@http4s_blaze_client//jar",
+      "@http4s_blaze_core//jar",
+      "@http4s_dsl//jar",
+      "@http4s_client//jar",
+      "@http4s_core//jar",
+  ],
   visibility = ["//visibility:public"],
 )
 
