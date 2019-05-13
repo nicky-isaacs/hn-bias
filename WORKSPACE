@@ -23,6 +23,17 @@ scala_repositories((
     }
 ))
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "rules_jvm_external",
+    strip_prefix = "rules_jvm_external-1.2",
+    sha256 = "e5c68b87f750309a79f59c2b69ead5c3221ffa54ff9496306937bfa1c9c8c86b",
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/1.2.zip"
+)
+
+
+
 # Needed as a workout for https://github.com/bazelbuild/rules_scala/issues/726
 http_archive(
      name = "com_google_protobuf",
@@ -31,46 +42,27 @@ http_archive(
      strip_prefix = "protobuf-3.6.1.3",
 )
 
-# Maven artifacts
-maven_jar(
-    name = "http4s_core",
-    artifact = "org.http4s:http4s-core_2.12:0.20.0",
-    sha1 = "3c2c7edc4f0d78024be2dc3b6796b6211b508c50",
-)
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-maven_jar(
-    name = "http4s_client",
-    artifact = "org.http4s:http4s-client_2.12:0.20.0",
-)
-
-maven_jar(
-    name = "http4s_dsl",
-    artifact = "org.http4s:http4s-dsl_2.12:0.20.0",
-    sha1 = "b52090e5763ebce6c084c1e94ccf24e164d94b77",
-)
-
-maven_jar(
-    name = "http4s_blaze_client",
-    artifact = "org.http4s:http4s-blaze-client_2.12:0.20.0",
-    sha1 = "42e40a73324194467360527b41d5dd6a34da3a45",
-)
-
-maven_jar(
-    name = "http4s_blaze_core",
-    artifact = "org.http4s:http4s-blaze-core_2.12:0.20.0",
-)
-
-maven_jar(
-    name = "cats_effect",
-    artifact = "org.typelevel:cats-effect_2.12:2.0.0-M1",
-)
-
-maven_jar(
-    name = "cats_core",
-    artifact = "org.typelevel:cats-core_2.12:2.0.0-M1",
-)
-
-maven_jar(
-    name = "cats_kernel",
-    artifact = "org.typelevel:cats-kernel_2.12:2.0.0-M1",
+maven_install(
+    name = "maven",
+    artifacts = [
+        "org.http4s:http4s-core_2.12:0.20.0",
+        "org.http4s:http4s-dsl_2.12:0.20.0",
+        "org.http4s:http4s-client_2.12:0.20.0",
+        "org.http4s:http4s-blaze-client_2.12:0.20.0",
+        "org.http4s:http4s-blaze-core_2.12:0.20.0",
+        "org.http4s:http4s-core_2.12:0.20.0",
+        "org.http4s:http4s-circe_2.12:0.20.0",
+        "org.http4s:http4s-jawn_2.12:0.20.0",
+        "org.typelevel:cats-effect_2.12:2.0.0-M1",
+        "io.circe:circe-generic_2.12:0.10.0-M1",
+        "io.circe:circe-literal_2.12:0.10.0-M1",
+        "io.circe:circe-core_2.12:0.12.0-M1",
+    ],
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+    fetch_sources = True,   # Fetch source jars. Defaults to False.
 )
